@@ -10,7 +10,7 @@ const tasks = [];
 //create task
 app.post("/api/user/tasks", (req, res) => {
   const { taskName } = req.body;
-  if (!taskName) return res.status(400).json({ message: "taskname required" });
+  if (!taskName) return res.status(409).json({ message: "taskname required" });
 
   const taskExist = tasks.some((task) => task.name === taskName);
 
@@ -25,7 +25,7 @@ app.post("/api/user/tasks", (req, res) => {
   } else {
     return res
       .status(400)
-      .json({ message: "duplicate task name, cant create!" });
+      .json({ message: "duplicate task name exist, cant create task!" });
   }
 });
 
@@ -43,7 +43,7 @@ app.get("/api/user/tasks/:id", (req, res) => {
   else return res.status(404).json({ message: "task not exist" });
 });
 
-//update tsask by id
+//update task by id
 app.put("/api/user/tasks/:id", (req, res) => {
   const { taskName } = req.body;
   const taskId = parseInt(req.params.id);
