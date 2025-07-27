@@ -56,8 +56,8 @@ app.put("/api/user/tasks/:id", (req, res) => {
   }
 });
 
-//delete task by id
-app.delete("/api/user/tasks/:id", (req, res) => {
+//delete tasks by id
+app.delete("/api/user/tasks/:id", (req, res,next) => {
   const taskId = parseInt(req.params.id);
   
     const taskIndex = tasks.findIndex((task) => task.id === taskId);
